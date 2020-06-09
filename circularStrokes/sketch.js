@@ -2,7 +2,7 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 }
 
-
+var sketchName = "Circular Strokes";
 var	sides= 4; // number of polygon sides
 var	variance= 25; // strength of polygon variation
 var	iterations= 10; // amount of times program runs
@@ -15,17 +15,17 @@ var y = [];
 var myWidth = 600;
 var myHeight = 600;
 
-var m; 
+var myRandomSeed; 
 
 
 function setup() {
 	createCanvas(myWidth,myHeight,SVG);
-	m = minute();
+	myRandomSeed = minute();
 }
 
 function draw() {
 		
-	randomSeed(m);
+	randomSeed(myRandomSeed);
 
 	background(255,255,255);
 	angle = 2 * 3.1415 /  sides;
@@ -55,18 +55,20 @@ function draw() {
 	noLoop();
 }
 
-function keyPressed(){
-	m = random(1000);
-	loop();
+function keyTyped(){
+	if(key==='r'){
+		myRandomSeed = random(1000);
+		loop();
+	}
 
-	//console.log(m);
 	if(key==='s') save();
+	if(key==='p') saveParameters();
 }
 
 var container = document.getElementById("defaultCanvas0");
 
 var gui = new guify({
-	title: "Sketch Manager for Prints",
+	title: "Sketch: " + sketchName,
 	theme: 'myTheme', // dark, light, yorha, or theme object, myTheme
 	align: 'right', // left, right
 	width: 300,
@@ -129,13 +131,56 @@ gui.Register({
 	}
 });
 
+gui.Register({
+	type: 'button',
+	label: "Skecth Reload 'r'",
+	action: () => {
+		myRandomSeed = random(1000);
+		loop();
+	}
+})
+
+gui.Register({
+	type: 'button',
+	label: "Save Parameters 'p'",
+	action: () => {
+			saveParameters();
+	}
+})
+
+gui.Register({
+	type: 'button',
+	label: "Save SVG 's'",
+	action: () => {
+			save(fileNameString() + '.svg');
+	}
+})
+
 
 
 function saveParameters(){
+	
 	let JSON = {
+		"Sketch Name": sketchName,
 		"Sides": sides,
 		"Variance": variance,
 		"Iterations": iterations,
+		"Random Seed": myRandomSeed
 	}
-	saveJSON(JSON);
+	saveJSON(JSON, fileNameString() + '.json');
 }
+
+function numberWithTwoDigit(number){
+	return number < 10 ? "0" + number : "" + number;
+}
+
+function fileNameString(){
+	let myStr = sketchName.replace(/\s+/g, '') + '_'; 
+	myStr += year();
+	myStr += numberWithTwoDigit(month());
+	myStr += numberWithTwoDigit(day());
+	myStr += "_" + numberWithTwoDigit(hour());
+	myStr += numberWithTwoDigit(minute());
+	return myStr;
+}
+
