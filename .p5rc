@@ -1,6 +1,9 @@
 {
   "name": "drawingsCNC",
   "projects": [
-    "circularStrokes"
+    "circularStrokes",
+    "perlinLines",
+    "perlinRadial",
+    "harmonograph"
   ]
 }
