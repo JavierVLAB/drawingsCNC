@@ -1,11 +1,11 @@
 
 
-var sketchName = "Perlin Noise";
+var sketchName = "harmonograph";
 var myRandomSeed; 
 var myWidth = 700;
 var myHeight = 700;
 
-var numLines = 40;
+var amp = 100;
 var margin = 10;
 var vStep = 4;
 var bandWidth = 5;
@@ -31,19 +31,26 @@ class Oscillator {
 
 
 
-var L = 100;
-var w = 1;
+var omega = 0.2;
 
 
-var os1 = new Oscillator(L, w, 0.0001, 0);
-var os2 = new Oscillator(L, w+1, 0, 3.1415/4);
-var os3 = new Oscillator(L, w, 0.0, 0);
-var os4 = new Oscillator(L, w+0.005, 0.00025, 3.1415);
+var os1 = new Oscillator(amp, omega+0.001, 0.0001, 0);
+var os2 = new Oscillator(amp, omega*2, 0, 3.1415/4);
+var os3 = new Oscillator(amp, omega+0.001, 0.0, 0);
+var os4 = new Oscillator(amp, omega, 0.00025, 3.1415);
 
+/*
+var os1 = new Oscillator(amp, omega+0.01, 0.0001, 0);
+var os2 = new Oscillator(amp, omega+1, 0, 3.1415/4);
+var os3 = new Oscillator(amp, omega+0.01, 0.0, 0);
+var os4 = new Oscillator(amp, omega+0.0005, 0.00025, 3.1415);
+*/
+
+var time = 0.01;
 var t = 0.0;
 
 function setup() {
-	createCanvas(myWidth,myHeight);
+	createCanvas(myWidth,myHeight,SVG);
 	myRandomSeed = minute();
 	noFill();
   smooth();
@@ -57,28 +64,30 @@ function draw() {
   push();
   
   translate(width/2, height/2);
-  rotate(radians(t*0.1));
-  translate(50, 0);
+  //translate(mouseX,mouseY);
+  rotate(radians(t*0.05));
+  translate(150, 0);
 	
 	beginShape();
-  for (var i= 0; i < 100; i++) {
+  for (var i= 0; i < 500; i++) {
 
     var x = os1.position(t)+os2.position(t);
     var y = os3.position(t)+os4.position(t);
     
     vertex(x, y);
-    t+=0.05;
+    t+=time;
   }
   endShape();
   pop();
   
-  t-=0.05;
+  t+=2;
 }
 
 function keyTyped(){
 	if(key==='r'){
 		myRandomSeed = random(1000);
-		loop();
+    setup();
+    
 	}
 
 	if(key==='s') save();

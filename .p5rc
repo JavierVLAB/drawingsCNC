@@ -4,6 +4,7 @@
     "circularStrokes",
     "perlinLines",
     "perlinRadial",
-    "harmonograph"
+    "harmonograph",
+    "gCodeHarmonograph"
   ]
 }
