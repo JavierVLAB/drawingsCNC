@@ -17,7 +17,7 @@ var gui = new guify({
 gui.Register({
 	type: 'folder',
 	label: "Sketch Properties",
-	open: true
+	open: false
 });
 
 gui.Register({
@@ -26,9 +26,9 @@ gui.Register({
   folder: "Sketch Properties",
 	min: 300, max: 1200, step: 20,
 	object: this, property: "myWidth",
-	onChange: (data) => {
-		loop();
+	onChange: (data) => {	
 		resizeCanvas(myWidth,myHeight);
+		loop();
 		setup();
 	}
 });
@@ -40,20 +40,36 @@ gui.Register({
 	min: 300, max: 1200, step: 20,
 	object: this, property: "myHeight",
 	onChange: (data) => {
-		loop();
 		resizeCanvas(myWidth,myHeight);
+		loop();
 		setup();
 	}
 });
 
-
+gui.Register({
+	type: 'folder',
+	label: "Time",
+	open: false
+});
 
 gui.Register({
 	type: 'range',
-  label: 'N-Lines',
-  folder: "Sketch Properties",
-	min: 3, max: 200, step: 1,
-	object: this, property: "numLines",
+  label: 'Initial t',
+  folder: "Time",
+	min: minOmega, max: maxOmega, step: stepOmega,
+	object: this, property: "t0",
+	onChange: (data) => {
+		t = t0;
+		loop();
+	}
+});
+
+gui.Register({
+	type: 'range',
+  label: 'Delta t',
+  folder: "Time",
+	min: 0, max: 0.1, step: 0.001,
+	object: this, property: "delta_t",
 	onChange: (data) => {
 		loop();
 	}
@@ -61,77 +77,69 @@ gui.Register({
 
 gui.Register({
 	type: 'range',
-  label: 'Margin',
-  folder: "Sketch Properties",
-	min: 0, max: 600, step: 20,
-	object: this, property: "margin",
+  label: 'Max step t',
+  folder: "Time",
+	min: 0, max: 10000, step: 100,
+	object: this, property: "maxTime",
 	onChange: (data) => {
+		loop();
+	}
+});
+
+var minOmega = 3.00;
+var maxOmega = 5.00;
+var stepOmega = 0.01;
+
+gui.Register({
+	type: 'folder',
+	label: "Frequencies",
+	open: false
+});
+
+gui.Register({
+	type: 'range',
+  label: 'Freq 1',
+  folder: "Frequencies",
+	min: minOmega, max: maxOmega, step: stepOmega,
+	object: this, property: "omega1",
+	onChange: (data) => {
+		os1.omega = omega1;
 		loop();
 	}
 });
 
 gui.Register({
 	type: 'range',
-  label: "Y offset",
-  folder: "Sketch Properties",
-	min: -50, max: 150, step: 1,
-	object: this, property: "yOffset",
+  label: 'Freq 2',
+  folder: "Frequencies",
+	min: minOmega, max: maxOmega, step: stepOmega,
+	object: this, property: "omega2",
 	onChange: (data) => {
+		os2.omega = omega2;
 		loop();
 	}
 });
 
 gui.Register({
 	type: 'range',
-  label: 'Vertical Step',
-  folder: "Sketch Properties",
-	min: 1, max: 10, step: 1,
-	object: this, property: "vStep",
+  label: 'Freq 3',
+  folder: "Frequencies",
+	min: minOmega, max: maxOmega, step: stepOmega,
+	object: this, property: "omega3",
 	onChange: (data) => {
+		os3.omega = omega3;
 		loop();
 	}
 });
 
 gui.Register({
 	type: 'range',
-  label: 'Random Seed',
-  folder: "Sketch Properties",
-	min: 0, max: 1000, step: 1,
-	object: this, property: "myRandomSeed",
+  label: 'Freq 4',
+  folder: "Frequencies",
+	min: minOmega, max: maxOmega, step: stepOmega,
+	object: this, property: "omega4",
 	onChange: (data) => {
-		loop();
-	}
-});
-
-gui.Register({
-	type: 'range',
-  label: 'Max Steps',
-  folder: "Sketch Properties",
-	min: 0, max: 200, step: 1,
-	object: this, property: "maxStep",
-	onChange: (data) => {
-		loop();
-	}
-});
-
-gui.Register({
-	type: 'range',
-  label: "Noise Par 1",
-  folder: "Sketch Properties",
-	min: 0.00, max: 2, step:0.001,
-	object: this, property: "noisePar1",
-	onChange: (data) => {
-		loop();
-	}
-});
-
-gui.Register({
-	type: 'range',
-  label: "Noise Par 2",
-  folder: "Sketch Properties",
-	min: 0.00, max: 2, step:0.001,
-	object: this, property: "noisePar2",
-	onChange: (data) => {
+		os4.omega = omega4;
 		loop();
 	}
 });
@@ -139,25 +147,16 @@ gui.Register({
 gui.Register({
 	type: 'folder',
 	label: "Save",
-	open: true
+	open: false
 });
 
 gui.Register({
 	type: 'button',
-  label: "Skecth Reload 'r'",
-  folder: "Save",
+	label: "Skecth Reload 'r'",
+	folder: "Save",
 	action: () => {
 		myRandomSeed = random(1000);
 		loop();
-	}
-})
-
-gui.Register({
-	type: 'button',
-	label: "Save PNGs 's'",
-	folder: "Save",
-	action: () => {
-			save(fileNameString() + '.png');
 	}
 })
 
@@ -172,6 +171,15 @@ gui.Register({
 
 gui.Register({
 	type: 'button',
+	label: "Save PNGs 's'",
+	folder: "Save",
+	action: () => {
+			save(fileNameString() + '.png');
+	}
+})
+
+gui.Register({
+	type: 'button',
   label: "Save GCODE 'g'",
   folder: "Save",
 	action: () => {
@@ -181,7 +189,6 @@ gui.Register({
 		writer.close();
 	}
 })
-
 
 
 function numberWithTwoDigit(number){
@@ -202,14 +209,26 @@ function saveParameters(){
 	
 	let JSON = {
 		"Sketch Name": sketchName,
-		"N-Lines": numLines,
-		"Margin": margin,
-		"Y-Offset": yOffset,
-		"Vertical Step": vStep,
-		"Random Seed": myRandomSeed,
-		"Noise Par 1": noisePar1,
-		"Noise Par 2": noisePar2,
-		"max Steps": maxStep,
+		"initial time (t0)": t0,
+		"delta t": delta_t,
+		"total t step": maxTime,
+		"final time": maxTime*delta_t + t0,
+		"omega1": omega1,
+		"omega2": omega2,
+		"omega3": omega3,
+		"omega4": omega4,
+		"amp1": amp1,
+		"amp2": amp2,
+		"amp3": amp3,
+		"amp4": amp4,
+		"damp1": damp1,
+		"damp2": damp2,
+		"damp3": damp3,
+		"damp4": damp4,
+		"phase1": phase1,
+		"phase2": phase2,
+		"phase3": phase3,
+		"phase4": phase4
 	}
 	saveJSON(JSON, fileNameString() + '.json');
 }

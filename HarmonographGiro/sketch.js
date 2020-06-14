@@ -20,26 +20,26 @@ class Oscillator {
   }
 }
 
-var omega1 = 4.18;
-var omega2 = 4.13;
-var omega3 = 4.1;
-var omega4 = 4.14;
-var amp1 = 200;
-var amp2 = 200;
-var amp3 = 200;
-var amp4 = 200;
-var damp1 = 0.007;
-var damp2 = 0.001;
-var damp3 = 0.002;
-var damp4 = 0.035;
+var omega1 = 1.0;
+var omega2 = 2.0;
+var omega3 = 1.0;
+var omega4 = 1.005;
+var amp1 = 100;
+var amp2 = 100;
+var amp3 = 100;
+var amp4 = 100;
+var damp1 = 0.0001;
+var damp2 = 0.00;
+var damp3 = 0.00;
+var damp4 = 0.00025;
 var phase1 = 0.0;
 var phase2 = 3.1415/4;
 var phase3 = 0.0;
 var phase4 = 3.1415;
 
 var t0 = 0.0;
-var maxTime = 800;
-var delta_t = 0.02;
+var maxTime = 100;
+var delta_t = 0.3;
 var t;
 
 var os1 = new Oscillator(amp1, omega1, damp1, phase1);
@@ -52,18 +52,21 @@ var os4 = new Oscillator(amp4, omega4, damp4, phase4);
 function setup() {
 
   createCanvas(myWidth,myHeight);
-	stroke(0,50);
+	stroke(0,10);
 	noFill();
 }
 
-
+t = t0;
 function draw() {
-	background(255,255,255);
+	//background(255,255,255);
 
 	var x;
 	var y;
-	t = t0;
+	translate(width/2,height/2);
+	rotate(radians(t*0.1));
 	
+	translate(50,0);
+	translate(-width/2,-height/2);
   gcode = startGcode;
   x = os1.position(t) + os3.position(t)/2 + width/2;
 	y = os2.position(t) + os4.position(t)/2 + height/2;
@@ -85,7 +88,7 @@ function draw() {
   gcode += penUP;
   gcode += endGcode;
 
-  noLoop();
+  //noLoop();
 
 }
 

@@ -1,0 +1,11 @@
+{
+  "Sketch Name": "Perlin Noise",
+  "N-Lines": 170,
+  "Margin": 280,
+  "Y-Offset": -13,
+  "Vertical Step": 2,
+  "Random Seed": 43,
+  "Noise Par 1": 0.77,
+  "Noise Par 2": 0.215,
+  "max Steps": 100
+}

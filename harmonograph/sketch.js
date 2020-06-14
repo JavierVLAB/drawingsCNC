@@ -55,8 +55,8 @@ function setup() {
 	noFill();
   smooth();
   background(255);
-  strokeWeight(0.2);
-  stroke(0, 100);
+  strokeWeight(0.5);
+  stroke(0, 10);
 }
 
 function draw() {

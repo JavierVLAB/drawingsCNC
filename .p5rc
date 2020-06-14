@@ -5,6 +5,8 @@
     "perlinLines",
     "perlinRadial",
     "harmonograph",
-    "gCodeHarmonograph"
+    "gCodeHarmonograph",
+    "HarmonographGiro",
+    "PerlinWalkers"
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "Sketch Name": "GCODE Harmonograph",
+  "initial time (t0)": 17.3,
+  "delta t": 0.02,
+  "total t step": 9600,
+  "final time": 209.3,
+  "omega1": 4.18,
+  "omega2": 4.13,
+  "omega3": 4.1,
+  "omega4": 4.14,
+  "amp1": 200,
+  "amp2": 200,
+  "amp3": 200,
+  "amp4": 200,
+  "damp1": 0.007,
+  "damp2": 0.001,
+  "damp3": 0.002,
+  "damp4": 0.035,
+  "phase1": 1.88,
+  "phase2": 2.61,
+  "phase3": 0.35,
+  "phase4": 1.82
+}
