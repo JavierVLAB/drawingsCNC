@@ -38,7 +38,7 @@ var phase3 = 0.0;
 var phase4 = 3.1415;
 
 var t0 = 0.0;
-var maxTime = 800;
+var maxTime = 6000;
 var delta_t = 0.02;
 var t;
 

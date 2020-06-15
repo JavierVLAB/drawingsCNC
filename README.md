@@ -22,7 +22,7 @@ Drawings in P5 js for print a CNC or Plotter
 - [Circular Strokes](https://javiervlab.github.io/drawingsCNC/circularStrokes/) 
 - [GCODE Harmonograph](https://javiervlab.github.io/drawingsCNC/gCodeHarmonograph/) 
 - [Harmonograph](https://javiervlab.github.io/drawingsCNC/harmonograph/) 
-[HarmonographGiro](https://javiervlab.github.io/drawingsCNC/HarmonographGiro/) 
+- [HarmonographGiro](https://javiervlab.github.io/drawingsCNC/HarmonographGiro/) 
 - [Perlin Lines](https://javiervlab.github.io/drawingsCNC/perlinLines/) 
 - [Perlin Radial](https://javiervlab.github.io/drawingsCNC/perlinRadial/)
 - [PerlinWalkers](https://javiervlab.github.io/drawingsCNC/PerlinWalkers/)  

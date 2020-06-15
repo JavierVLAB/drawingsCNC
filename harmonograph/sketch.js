@@ -46,7 +46,7 @@ var os3 = new Oscillator(amp, omega+0.01, 0.0, 0);
 var os4 = new Oscillator(amp, omega+0.0005, 0.00025, 3.1415);
 */
 
-var time = 0.01;
+var time = 0.05;
 var t = 0.0;
 
 function setup() {
@@ -55,8 +55,8 @@ function setup() {
 	noFill();
   smooth();
   background(255);
-  strokeWeight(0.5);
-  stroke(0, 10);
+  //strokeWeight(0.5);
+  stroke(0, 100);
 }
 
 function draw() {
@@ -80,7 +80,7 @@ function draw() {
   endShape();
   pop();
   
-  t+=2;
+  //t+=2;
 }
 
 function keyTyped(){
