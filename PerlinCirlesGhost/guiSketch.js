@@ -48,35 +48,37 @@ gui.Register({
 
 gui.Register({
 	type: 'range',
-  label: 'Amplitud',
+  label: 'N-Lines',
   folder: "Sketch Properties",
-	min: 5, max: 200, step: 1,
-	object: this, property: "amp",
-	onChange: (data) => {
-		os1.amp = data;
-	}
-});
-
-gui.Register({
-	type: 'range',
-  label: 'Frecuency',
-  folder: "Sketch Properties",
-	min: 0, max: 5,
-	object: this, property: "omega",
-	onChange: (data) => {
-		os1.omega = data;
-		os3.omega = data;
-	}
-});
-
-gui.Register({
-	type: 'range',
-  label: "Time step",
-  folder: "Sketch Properties",
-	min: 0.001, max: 0.02, step: 0.001,
-	object: this, property: "time",
+	min: 3, max: 100, step: 1,
+	object: this, property: "numLines",
 	onChange: (data) => {
 		loop();
+		setup();
+	}
+});
+
+gui.Register({
+	type: 'range',
+  label: 'Margin',
+  folder: "Sketch Properties",
+	min: 0, max: 100, step: 1,
+	object: this, property: "margin",
+	onChange: (data) => {
+		loop();
+		setup();
+	}
+});
+
+gui.Register({
+	type: 'range',
+  label: "Band Width",
+  folder: "Sketch Properties",
+	min: 1, max: 4, step: 0.01,
+	object: this, property: "bandWidth",
+	onChange: (data) => {
+		loop();
+		setup();
 	}
 });
 
@@ -84,10 +86,11 @@ gui.Register({
 	type: 'range',
   label: 'Vertical Step',
   folder: "Sketch Properties",
-	min: 1, max: 10, step: 1,
+	min: 0.01, max: 3, step: 0.01,
 	object: this, property: "vStep",
 	onChange: (data) => {
 		loop();
+		setup();
 	}
 });
 
@@ -99,6 +102,7 @@ gui.Register({
 	object: this, property: "noisePar1",
 	onChange: (data) => {
 		loop();
+		setup();
 	}
 });
 
@@ -110,6 +114,7 @@ gui.Register({
 	object: this, property: "noisePar2",
 	onChange: (data) => {
 		loop();
+		setup();
 	}
 });
 
@@ -120,6 +125,7 @@ gui.Register({
 	action: () => {
 		myRandomSeed = random(1000);
 		loop();
+		setup();
 	}
 })
 
@@ -128,12 +134,7 @@ gui.Register({
   label: "Save Parameters 'p'",
   folder: "Sketch Properties",
 	action: () => {
-		//saveParameters();
-		let writer = createWriter('newFile.txt');
-		// write 'Hello world!'' to the file
-		writer.write(['Hello world!']);
-		// close the PrintWriter and save the file
-		writer.close();
+			saveParameters();
 	}
 })
 

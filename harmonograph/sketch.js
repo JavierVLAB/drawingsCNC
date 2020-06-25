@@ -46,7 +46,7 @@ var os3 = new Oscillator(amp, omega+0.01, 0.0, 0);
 var os4 = new Oscillator(amp, omega+0.0005, 0.00025, 3.1415);
 */
 
-var time = 0.05;
+var time = 0.2;
 var t = 0.0;
 
 function setup() {
@@ -57,29 +57,45 @@ function setup() {
   background(255);
   //strokeWeight(0.5);
   stroke(0, 100);
+
 }
+
+var v = new p5.Vector(0,0);
 
 function draw() {
   noFill();
-  push();
-  
-  translate(width/2, height/2);
-  //translate(mouseX,mouseY);
-  rotate(radians(t*0.05));
-  translate(150, 0);
-	
-	beginShape();
-  for (var i= 0; i < 500; i++) {
 
-    var x = os1.position(t)+os2.position(t);
-    var y = os3.position(t)+os4.position(t);
-    
-    vertex(x, y);
-    t+=time;
-  }
-  endShape();
-  pop();
   
+  //translate(width/2, height/2);
+  //translate(mouseX,mouseY);
+  //rotate(radians(t*0.05));
+  //translate(150, 0);
+  
+  gcode = startGcode;
+  v.x = os1.position(t) + os3.position(t)/2;
+  v.y = os2.position(t) + os4.position(t)/2;
+  v.add(width/2,height/2);
+	gcode += gcodeLine(v.x,v.y);
+	gcode += penDOWN;
+
+	
+  for (var i= 0; i < 15000; i++) {
+    v.x = os1.position(t)+os2.position(t)  + 150;
+    v.y = os3.position(t)+os4.position(t);
+
+    v.rotate(t*0.002);
+    v.add(width/2,height/2);
+    point(v.x, v.y);
+    gcode += gcodeLine(v.x,v.y);
+    t+=time;
+
+  }
+
+  gcode += penUP;
+  gcode += gcodeLine(0,0);
+  gcode += endGcode;
+  
+  noLoop();
   //t+=2;
 }
 
@@ -94,5 +110,13 @@ function keyTyped(){
 	if(key==='p') saveParameters();
 }
 
+function coordinateTransfor(_x, _y){
+  let x; 
+  let y;
+
+  x = _x + width/2;
+  y = _y + height/2;
+
+}
 
 

@@ -1,7 +1,7 @@
 
 var sketchName = "GCODE Harmonograph";
-var myWidth = 800;
-var myHeight = 800;
+var myWidth = 600;
+var myHeight = 600;
 
 var maxTime = 100;
 function setup() {
@@ -16,8 +16,8 @@ function setup() {
 function draw() {
 	background(255,255,255);
 
-	var x0 = 50;
-	var y0 = 425;
+	var x0 = width/2;
+	var y0 = height/2;
 
 	var x;
 	var y;
@@ -25,7 +25,7 @@ function draw() {
 
   gcode = startGcode;
   
-	gcode += gcodeLine(x,y);
+	//gcode += gcodeLine(x,y);
 	gcode += penDOWN;
 	var r = 100;
 	beginShape();
@@ -36,13 +36,13 @@ function draw() {
 			x = rr * cos (2 * i * 3.1415 / 180) + x0;
 			y = rr * sin (2 * i * 3.1415 / 180) + y0;
 			vertex(x,y);
-			//r += 0.001;
-			x0 += 0.015;
-			y0 = 400 + (noise(x0*0.001))*50;
+			r += 0.01;
+			//x0 += 0.015;
+			//y0 = 400 + (noise(x0*0.001))*50;
 			gcode += gcodeLine(x,y);
 			
 		}
-		 ellipse(x0,y0,10,10);
+		 //ellipse(x0,y0,10,10);
 	}
 	endShape();
   gcode += penUP;

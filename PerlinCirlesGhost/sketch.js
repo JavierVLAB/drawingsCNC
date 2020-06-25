@@ -1,26 +1,27 @@
 
 
-var sketchName = "Perlin Noise";
+var sketchName = "Perlin Circles Ghost";
 var myRandomSeed; 
 var myWidth = 400;
 var myHeight = 600;
 
-var numLines = 20;
+var numLines = 78;
 var margin = 10;
-var vStep = 4;
-var bandWidth = 20;
-var noisePar1 = 0.035;
-var noisePar2 = 0.035;
+var vStep = 0.26;
+var bandWidth = 3.38;
+var noisePar1 = 0.267;
+var noisePar2 = 0.001;
 
 var dibujar = true;
 
 
 function setup() {
 	createCanvas(myWidth,myHeight,SVG);
-	myRandomSeed = minute();
+	//myRandomSeed = minute();
 	noFill();
 	//strokeWeight(0.5);
 	stroke(0,255);
+	loop();
 }
 
 function draw() {
@@ -30,35 +31,37 @@ function draw() {
 	var dr = 0;
 	var x;
 	var y;
+	var x0 = width/2;
+	var y0 = 80;
 
 	gcode = startGcode;
 
-	x = width/2 + 30;
-	y = height/2;
+	x = x0 + 30;
+	y = y0;
 
 	gcode += gcodeLine(x,y);
 	gcode += penDOWN;
-	
+	beginShape();
 	for(var j = 0; j < numLines; j++){
 
-		beginShape();
-		var numAngle = 180;
+		
+		var numAngle = 20;
     for (var i = 0; i < numAngle; i++) {
-			r = j*vStep + 30;
-			dr = bandWidth*noise(i*noisePar1,j*noisePar2);
-			x = width/2 + (r+dr)*cos(2.0*PI*i/numAngle + j*0.03);
-			y = height/2 + (r+dr)*sin(2.0*PI*i/numAngle + j*0.03);
+			r = 80;
+			dr = bandWidth*(0.5-noise(i*noisePar1,j*noisePar2))*j;
+			x = x0 + (r+dr)*cos(2.0*PI*i/numAngle + j*0.03);
+			y = y0 + (r+dr)*sin(2.0*PI*i/numAngle + j*0.03);
 			curveVertex(x,y);
-			
-
+			y0 += vStep;
 			gcode += gcodeLine(x,y);
 
 		}
 
-		endShape();
+		
 	}
 	gcode += penUP;
 	gcode += endGcode;
+	endShape();
 	noLoop();
 
 }
@@ -67,6 +70,7 @@ function keyTyped(){
 	if(key==='r'){
 		myRandomSeed = random(1000);
 		loop();
+		setup();
 	}
 
 	if(key==='s') save();

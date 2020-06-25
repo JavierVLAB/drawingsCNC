@@ -25,4 +25,5 @@ Drawings in P5 js for print a CNC or Plotter
 - [HarmonographGiro](https://javiervlab.github.io/drawingsCNC/HarmonographGiro/) 
 - [Perlin Lines](https://javiervlab.github.io/drawingsCNC/perlinLines/) 
 - [Perlin Radial](https://javiervlab.github.io/drawingsCNC/perlinRadial/)
-- [PerlinWalkers](https://javiervlab.github.io/drawingsCNC/PerlinWalkers/)  
+- [PerlinWalkers](https://javiervlab.github.io/drawingsCNC/PerlinWalkers/)
+- [PerlinCirclesGhost](https://javiervlab.github.io/drawingsCNC/PerlinCirclesGhost/)  

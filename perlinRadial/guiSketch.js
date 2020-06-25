@@ -140,6 +140,18 @@ gui.Register({
 	}
 })
 
+gui.Register({
+	type: 'button',
+  label: "Save GCODE 'g'",
+  folder: "Sketch Properties",
+	action: () => {
+		let name = fileNameString() + '.gcode';
+		let writer = createWriter(name);
+		writer.write(gcode);
+		writer.close();
+	}
+})
+
 function saveParameters(){
 	
 	let JSON = {

@@ -86,7 +86,7 @@ gui.Register({
 	}
 });
 
-var minOmega = 3.80;
+var minOmega = 1.80;
 var maxOmega = 4.80;
 var stepOmega = 0.001;
 
