@@ -8,6 +8,8 @@
     "gCodeHarmonograph",
     "HarmonographGiro",
     "PerlinWalkers",
-    "PerlinCirclesGhost"
+    "PerlinCirclesGhost",
+    "circlesDraw2",
+    "circlesDraw"
   ]
 }

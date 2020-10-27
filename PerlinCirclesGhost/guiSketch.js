@@ -86,7 +86,7 @@ gui.Register({
 	type: 'range',
   label: 'Vertical Step',
   folder: "Sketch Properties",
-	min: 0.01, max: 3, step: 0.01,
+	min: 0.01, max: 3, step: 0.001,
 	object: this, property: "vStep",
 	onChange: (data) => {
 		loop();

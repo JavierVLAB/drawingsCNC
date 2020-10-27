@@ -1,9 +1,10 @@
 body {
+  background-image: url("../libraries/sharon-mccutcheon-ouRjPLWGbPc-unsplash.jpg");
   margin:0;
   margin-left:45px;
   padding:0;
   overflow: hidden;
-  background: rgb(190,190,190);
+  /*background: rgb(190,190,190);*/
   text-align: center;
   height: 100%;
 }
@@ -15,6 +16,6 @@ canvas {
   background-color: #FFFFFF;
   display:table;
   margin: auto;
-  box-shadow: 10px 10px 10px grey;
+  box-shadow: 10px 10px 10px #333333;
   vertical-align: middle;
 }
